@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BruhGPT</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #1e1e1e;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .chatbox {
+      width: 400px;
+      background: #2b2b2b;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+
+    .messages {
+      height: 450px;
+      overflow-y: auto;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .message {
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 8px;
+      max-width: 90%;
+      display: inline-block;
+    }
+
+    .user {
+      background: #0078ff;
+      margin-left: auto;
+    }
+
+    .bot {
+      background: #444;
+      margin-right: auto;
+    }
+
+    .input-area {
+      display: flex;
+      border-top: 1px solid #555;
+    }
+
+    input {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 12px 20px;
+      border: none;
+      background: #00b894;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+	  transition: all 0.3s ease;
+	  transform: scale(1.1);
+      background: #00a383;
+    }
+	
+.new-chat-btn {
+  width: 10%;
+  padding: 12px;
+  border: none;
+  background: #ff4757;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.new-chat-btn:hover {
+  transition: all 0.3s ease;
+  transform: scale(1.1);
+  background: #e84118;
+}
+  </style>
+</head>
+<body>
+  <a href="valikko3.html">
+    <button class="valikko" style="transition: all 0.3s ease; font-weight: bold; position:absolute; top:254px; right:766.2px; padding:10px 14px; font-size:18px; cursor:pointer;">⬅️ POISTU</button>
+  </a>
+<button onclick="newChat()" class="new-chat-btn">
+  UUSI KESKUSTELU
+</button>
+<div class="chatbox">
+<p style="text-align:center; color:#aaa; margin:10px;">
+  BruhGPT:llä on noin 480 uniikkia vastausta!
+</p>
+  <div class="messages" id="messages"></div>
+  <div class="input-area">
+    <input type="text" id="userInput" placeholder="Kirjoita viesti...">
+    <button onclick="sendMessage()">Lähetä</button>
+  </div>
+</div>
+
+<script>
+function newChat() {
+  const messages = document.getElementById("messages");
+
+  messages.innerHTML = "";
+
+  addMessage("Uusi keskustelu aloitettu!", "bot");
+}
+
+  function addMessage(text, sender) {
+    const messages = document.getElementById("messages");
+
+    const div = document.createElement("div");
+    div.classList.add("message");
+    div.classList.add(sender);
+
+    div.textContent = text;
+
+    messages.appendChild(div);
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  function getBotResponse(message) {
+    message = message.toLowerCase();
+
+    if (message.includes("hei")) {
+      return "Hei! Mitä kuuluu?";
+    }
+
+if (message.includes("viherlaakso")) {
+    return "Viherlaakso on vehreä ja monimuotoinen alue, jossa elää Grass-, Fire-, Water-, Poison- ja monen muun tyypin Olioita. Alueen Oliot #001–#050 muodostavat ensimmäisen osan Oliodexistä.";
+}
+
+if (message.includes("kuusivaara")) {
+    return "Kuusivaara on kylmä ja vuoristoinen alue, jossa kasvaa havumetsiä ja esiintyy runsaasti Ice-, Rock-, Grass- ja Dragon-tyypin Olioita. Alueen Oliot ovat #051–#100.";
+}
+
+if (message.includes("liekkikoski")) {
+    return "Liekkikoski on kuumien vesien, koskien ja tuliperäisen luonnon alue. Siellä elää erityisesti Water-, Fire-, Electric- ja Rock-tyypin Olioita. Alueen Oliot ovat #101–#150.";
+}
+
+if (message.includes("haamumaa")) {
+    return "Haamumaa on synkkä ja mystinen alue, joka tunnetaan hautausmaista, raunioista ja usvista. Sen Olioissa korostuvat Ghost-, Dark-, Poison- ja Psychic-tyypit. Alueen Oliot ovat #151–#200.";
+}
+
+if (message.includes("jalokiviylänkö")) {
+    return "Jalokiviylänkö on täynnä kristalleja, jalokiviä ja hohtavia mineraaleja. Alueella tavataan erityisesti Rock-, Psychic-, Fairy-, Ice- ja Bug-tyypin Olioita. Alueen Oliot ovat #201–#250.";
+}
+
+if (message.includes("myrskyrannikko")) {
+    return "Myrskyrannikko on voimakkaiden tuulten, sateiden ja merimyrskyjen hallitsema rannikkoalue. Siellä elää runsaasti Water-, Electric-, Flying- ja Dark-tyypin Olioita. Alueen Oliot ovat #251–#300.";
+}
+
+if (message.includes("kehityslaakso")) {
+    return "Kehityslaakso on erityinen alue, jossa sijaitsevat Oliot voivat Mega-kehittyä. Täältä löytyvät Oliot #301–#331, jotka ovat voimakkaampia Mega-muotoja tutuista Olioista eri puolilta maailmaa.";
+}
+
+if (message.includes("random olio")) {
+    return "Tässä random Olio: Torkkuli Numero: #031 Tyyppi: Normal";
+}
+
+if (message.includes("olio")) {
+    return "Jokaisella Oliolla on oma nimi, numero, tyyppi ja ominaisuudet. Oliot voivat muodostaa kehitysketjuja, ja osa niistä voi saavuttaa Mega-kehityksen. Tarkista Oliodex jos haluat tarkempia tietoja.";
+}
+	
+if (message.includes("mega-mössö")) { return "Numero: #301 Tyyppi: Ground & Water"; }
+
+if (message.includes("mega-sipuliruhtinas")) { return "Numero: #302 Tyyppi: Grass & Poison"; }
+
+if (message.includes("mega-pyromanaaja")) { return "Numero: #303 Tyyppi: Fire & Ghost"; }
+
+if (message.includes("mega-geysiirkuningas")) { return "Numero: #304 Tyyppi: Water & Rock"; }
+
+if (message.includes("mega-räkäruhtinas")) { return "Numero: #305 Tyyppi: Poison & Dark"; }
+
+if (message.includes("mega-torkkuli")) { return "Numero: #306 Tyyppi: Grass & Fairy"; }
+
+if (message.includes("mega-havuhirvi")) { return "Numero: #307 Tyyppi: Grass & Dragon"; }
+
+if (message.includes("mega-rojuhirvi")) { return "Numero: #308 Tyyppi: Fire & Dragon"; }
+
+if (message.includes("mega-lirskijä")) { return "Numero: #309 Tyyppi: Water & Ice"; }
+
+if (message.includes("mega-lohikäärmeruhtinas")) { return "Numero: #310 Tyyppi: Dragon & Ice"; }
+
+if (message.includes("mega-jäärevontuli")) { return "Numero: #311 Tyyppi: Ice & Fairy"; }
+
+if (message.includes("mega-jääkuusi")) { return "Numero: #312 Tyyppi: Ice & Grass"; }
+
+if (message.includes("mega-prismakettu")) { return "Numero: #313 Tyyppi: Rock & Psychic"; }
+
+if (message.includes("mega-psykoperho")) { return "Numero: #314 Tyyppi: Psychic & Fairy"; }
+
+if (message.includes("mega-kristallikuningatar")) { return "Numero: #315 Tyyppi: Fairy & Rock"; }
+
+if (message.includes("mega-sadeorkesteri")) { return "Numero: #316 Tyyppi: Water & Electric"; }
+
+if (message.includes("mega-myrskykoira")) { return "Numero: #317 Tyyppi: Fire & Electric"; }
+
+if (message.includes("mega-myrskyhavu")) { return "Numero: #318 Tyyppi: Grass & Flying"; }
+
+if (message.includes("mega-riuttahai")) { return "Numero: #319 Tyyppi: Water & Dark"; }
+
+if (message.includes("mega-kalmistokeisari")) { return "Numero: #320 Tyyppi: Ghost & Dark"; }
+
+if (message.includes("mega-tuonensusi")) { return "Numero: #321 Tyyppi: Dark & Ghost"; }
+
+if (message.includes("mega-toksiinijärkäle")) { return "Numero: #322 Tyyppi: Poison & Ground"; }
+
+if (message.includes("mega-kelppikuningas")) { return "Numero: #323 Tyyppi: Grass & Water"; }
+
+if (message.includes("mega-makarovio")) { return "Numero: #324 Tyyppi: Fire & Ground"; }
+
+if (message.includes("mega-geysiirijätti")) { return "Numero: #325 Tyyppi: Water & Fire"; }
+
+if (message.includes("mega-koskenruhtinas")) { return "Numero: #326 Tyyppi: Water & Fighting"; }
+
+if (message.includes("mega-kalliosyöksy")) { return "Numero: #327 Tyyppi: Rock & Flying"; }
+
+if (message.includes("mega-kristallikaiku")) { return "Numero: #328 Tyyppi: Psychic & Rock"; }
+
+if (message.includes("mega-jääkidekarhu")) { return "Numero: #329 Tyyppi: Ice & Steel"; }
+
+if (message.includes("mega-riuttakeisari")) { return "Numero: #330 Tyyppi: Water & Psychic"; }
+
+if (message.includes("mega-myrskylinna")) { return "Numero: #331 Tyyppi: Rock & Electric"; }
+	
+	if (message.includes("sadepilli")) { return "Numero: #251 Tyyppi: Water"; }
+if (message.includes("myrskisävel")) { return "Numero: #252 Tyyppi: Water & Electric"; }
+if (message.includes("sadeorkesteri")) { return "Numero: #253 Tyyppi: Water & Electric"; }
+
+if (message.includes("rantapentu")) { return "Numero: #254 Tyyppi: Fire"; }
+if (message.includes("roihuranta")) { return "Numero: #255 Tyyppi: Fire & Rock"; }
+if (message.includes("myrskykoira")) { return "Numero: #256 Tyyppi: Fire & Electric"; }
+
+if (message.includes("tuuliviima")) { return "Numero: #257 Tyyppi: Grass"; }
+if (message.includes("merituuli")) { return "Numero: #258 Tyyppi: Grass & Flying"; }
+if (message.includes("myrskyhavu")) { return "Numero: #259 Tyyppi: Grass & Flying"; }
+
+if (message.includes("usvahaukka")) { return "Numero: #260 Tyyppi: Flying & Water"; }
+if (message.includes("myrskyliitäjä")) { return "Numero: #261 Tyyppi: Flying & Water"; }
+
+if (message.includes("riuttahai")) { return "Numero: #262 Tyyppi: Water & Dark"; }
+
+if (message.includes("kuplapyrstö")) { return "Numero: #263 Tyyppi: Water"; }
+if (message.includes("aaltokettu")) { return "Numero: #264 Tyyppi: Water & Fairy"; }
+if (message.includes("tyrskykettu")) { return "Numero: #265 Tyyppi: Water & Fairy"; }
+
+if (message.includes("korallinysä")) { return "Numero: #266 Tyyppi: Rock"; }
+if (message.includes("korallipiikki")) { return "Numero: #267 Tyyppi: Rock & Water"; }
+if (message.includes("korallijätti")) { return "Numero: #268 Tyyppi: Rock & Water"; }
+
+if (message.includes("tuulisiipi")) { return "Numero: #269 Tyyppi: Flying"; }
+if (message.includes("myrskysiipi")) { return "Numero: #270 Tyyppi: Flying & Electric"; }
+
+if (message.includes("ukkosrausku")) { return "Numero: #271 Tyyppi: Electric & Water"; }
+
+if (message.includes("syvyyssilmä")) { return "Numero: #272 Tyyppi: Water & Psychic"; }
+
+if (message.includes("lokinokka")) { return "Numero: #273 Tyyppi: Flying"; }
+if (message.includes("merilokki")) { return "Numero: #274 Tyyppi: Flying & Water"; }
+if (message.includes("myrskylokki")) { return "Numero: #275 Tyyppi: Flying & Electric"; }
+
+if (message.includes("särkkähai")) { return "Numero: #276 Tyyppi: Dark"; }
+if (message.includes("riuttakeisari")) { return "Numero: #277 Tyyppi: Water & Dark"; }
+
+if (message.includes("levämato")) { return "Numero: #278 Tyyppi: Grass"; }
+if (message.includes("leväkäärme")) { return "Numero: #279 Tyyppi: Grass & Water"; }
+
+if (message.includes("sumutassu")) { return "Numero: #280 Tyyppi: Dark"; }
+if (message.includes("usvajuoksija")) { return "Numero: #281 Tyyppi: Dark & Flying"; }
+if (message.includes("usvavarjo")) { return "Numero: #282 Tyyppi: Dark & Flying"; }
+
+if (message.includes("ukkosvalas")) { return "Numero: #283 Tyyppi: Water & Electric"; }
+
+if (message.includes("sähkösimpukka")) { return "Numero: #284 Tyyppi: Electric"; }
+if (message.includes("salamakuori")) { return "Numero: #285 Tyyppi: Electric & Water"; }
+if (message.includes("ukkotursas")) { return "Numero: #286 Tyyppi: Electric & Water"; }
+
+if (message.includes("tyrskykruunu")) { return "Numero: #287 Tyyppi: Water & Fairy"; }
+
+if (message.includes("merirapu")) { return "Numero: #288 Tyyppi: Water"; }
+if (message.includes("hyökyrapu")) { return "Numero: #289 Tyyppi: Water & Fighting"; }
+
+if (message.includes("myrskylinna")) { return "Numero: #290 Tyyppi: Rock & Flying"; }
+
+if (message.includes("myrskykotka")) { return "Numero: #291 Tyyppi: Flying & Electric"; }
+
+if (message.includes("salamariutta")) { return "Numero: #292 Tyyppi: Rock & Electric"; }
+
+if (message.includes("pisarakala")) { return "Numero: #293 Tyyppi: Water"; }
+if (message.includes("myrskykala")) { return "Numero: #294 Tyyppi: Water & Electric"; }
+
+if (message.includes("meripeikko")) { return "Numero: #295 Tyyppi: Water & Dark"; }
+
+if (message.includes("tuulikeihäs")) { return "Numero: #296 Tyyppi: Flying & Fighting"; }
+if (message.includes("myrskypiikki")) { return "Numero: #297 Tyyppi: Flying & Fighting"; }
+
+if (message.includes("myrskyvaltias")) { return "Numero: #298 Tyyppi: Electric & Flying"; }
+
+if (message.includes("syväriuttakuningas")) { return "Numero: #299 Tyyppi: Water & Dragon"; }
+
+if (message.includes("aallonkeisari")) { return "Numero: #300 Tyyppi: Water & Electric"; }
+	
+	if (message.includes("kvartsikettu")) { return "Numero: #201 Tyyppi: Rock"; }
+if (message.includes("jalokivikettu")) { return "Numero: #202 Tyyppi: Rock & Psychic"; }
+if (message.includes("prismakettu")) { return "Numero: #203 Tyyppi: Rock & Psychic"; }
+
+if (message.includes("mielipörriäinen")) { return "Numero: #204 Tyyppi: Psychic"; }
+if (message.includes("hypnoperho")) { return "Numero: #205 Tyyppi: Psychic & Fairy"; }
+if (message.includes("psykoperho")) { return "Numero: #206 Tyyppi: Psychic & Fairy"; }
+
+if (message.includes("hohtomuru")) { return "Numero: #207 Tyyppi: Fairy"; }
+if (message.includes("kimallepallo")) { return "Numero: #208 Tyyppi: Fairy & Rock"; }
+if (message.includes("kristallikuningatar")) { return "Numero: #209 Tyyppi: Fairy & Rock"; }
+
+if (message.includes("kivisäde")) { return "Numero: #210 Tyyppi: Rock"; }
+if (message.includes("sädekivi")) { return "Numero: #211 Tyyppi: Rock & Fairy"; }
+
+if (message.includes("kvartsikuono")) { return "Numero: #212 Tyyppi: Rock"; }
+if (message.includes("kristallikoira")) { return "Numero: #213 Tyyppi: Rock & Ice"; }
+if (message.includes("kvartsisusi")) { return "Numero: #214 Tyyppi: Rock & Ice"; }
+
+if (message.includes("kimalisko")) { return "Numero: #215 Tyyppi: Rock"; }
+
+if (message.includes("särökivi")) { return "Numero: #216 Tyyppi: Rock"; }
+if (message.includes("halkeamakivi")) { return "Numero: #217 Tyyppi: Rock & Ground"; }
+
+if (message.includes("kideperhonen")) { return "Numero: #218 Tyyppi: Bug & Fairy"; }
+if (message.includes("sateenkaariyökkönen")) { return "Numero: #219 Tyyppi: Bug & Fairy"; }
+
+if (message.includes("jääkide")) { return "Numero: #220 Tyyppi: Ice"; }
+
+if (message.includes("kidekorva")) { return "Numero: #221 Tyyppi: Psychic & Rock"; }
+if (message.includes("kaikukide")) { return "Numero: #222 Tyyppi: Psychic & Rock"; }
+if (message.includes("kristallikaiku")) { return "Numero: #223 Tyyppi: Psychic & Rock"; }
+
+if (message.includes("kidepupu")) { return "Numero: #224 Tyyppi: Normal & Rock"; }
+if (message.includes("kristallijänis")) { return "Numero: #225 Tyyppi: Rock & Fairy"; }
+
+if (message.includes("loistekivi")) { return "Numero: #226 Tyyppi: Rock & Electric"; }
+if (message.includes("sähkökide")) { return "Numero: #227 Tyyppi: Electric & Rock"; }
+
+if (message.includes("kidekotilo")) { return "Numero: #228 Tyyppi: Water & Rock"; }
+if (message.includes("kristallikotilo")) { return "Numero: #229 Tyyppi: Water & Rock"; }
+
+if (message.includes("säihkylintu")) { return "Numero: #230 Tyyppi: Flying & Rock"; }
+if (message.includes("kidehaukka")) { return "Numero: #231 Tyyppi: Flying & Rock"; }
+
+if (message.includes("kultakivi")) { return "Numero: #232 Tyyppi: Rock"; }
+
+if (message.includes("kristallimato")) { return "Numero: #233 Tyyppi: Bug & Rock"; }
+if (message.includes("kidemato")) { return "Numero: #234 Tyyppi: Bug & Rock"; }
+if (message.includes("kristallikaivaja")) { return "Numero: #235 Tyyppi: Bug & Ground"; }
+
+if (message.includes("lasikonna")) { return "Numero: #236 Tyyppi: Water & Rock"; }
+if (message.includes("kidekonna")) { return "Numero: #237 Tyyppi: Water & Rock"; }
+
+if (message.includes("vuorikide")) { return "Numero: #238 Tyyppi: Rock"; }
+
+if (message.includes("kidekarhu")) { return "Numero: #239 Tyyppi: Ice & Rock"; }
+if (message.includes("jääkidekarhu")) { return "Numero: #240 Tyyppi: Ice & Rock"; }
+
+if (message.includes("kimmelsammal")) { return "Numero: #241 Tyyppi: Grass & Rock"; }
+if (message.includes("kidekasvu")) { return "Numero: #242 Tyyppi: Grass & Rock"; }
+
+if (message.includes("sädekuori")) { return "Numero: #243 Tyyppi: Rock & Fairy"; }
+
+if (message.includes("kidehiiri")) { return "Numero: #244 Tyyppi: Normal & Rock"; }
+if (message.includes("kidejyrsijä")) { return "Numero: #245 Tyyppi: Normal & Rock"; }
+
+if (message.includes("ametistikoi")) { return "Numero: #246 Tyyppi: Bug & Psychic"; }
+if (message.includes("ametistiyökkönen")) { return "Numero: #247 Tyyppi: Bug & Psychic"; }
+
+if (message.includes("astraaliprisma")) { return "Numero: #248 Tyyppi: Psychic & Fairy"; }
+
+if (message.includes("kvartsisarvi")) { return "Numero: #249 Tyyppi: Rock & Dragon"; }
+
+if (message.includes("kimalleloitsu")) { return "Numero: #250 Tyyppi: Fairy & Psychic"; }
+
+if (message.includes("varjolyhty")) { return "Numero: #151 Tyyppi: Ghost"; }
+if (message.includes("kryptakrooni")) { return "Numero: #152 Tyyppi: Ghost & Dark"; }
+if (message.includes("kalmistokeisari")) { return "Numero: #153 Tyyppi: Ghost & Dark"; }
+
+if (message.includes("sumuhaukkuri")) { return "Numero: #154 Tyyppi: Dark"; }
+if (message.includes("usvanraatelija")) { return "Numero: #155 Tyyppi: Dark & Ghost"; }
+if (message.includes("tuonensusi")) { return "Numero: #156 Tyyppi: Dark & Ghost"; }
+
+if (message.includes("mätämöykky")) { return "Numero: #157 Tyyppi: Poison"; }
+if (message.includes("limaloiske")) { return "Numero: #158 Tyyppi: Poison & Ground"; }
+if (message.includes("toksiinijärkäle")) { return "Numero: #159 Tyyppi: Poison & Ground"; }
+
+if (message.includes("hautakiviö")) { return "Numero: #160 Tyyppi: Rock"; }
+if (message.includes("hautakivinen")) { return "Numero: #161 Tyyppi: Rock & Ghost"; }
+if (message.includes("hautajärkäle")) { return "Numero: #162 Tyyppi: Rock & Ghost"; }
+
+if (message.includes("kummituskupla")) { return "Numero: #163 Tyyppi: Ghost"; }
+
+if (message.includes("kalmalintu")) { return "Numero: #164 Tyyppi: Dark & Flying"; }
+if (message.includes("kalmanlepakko")) { return "Numero: #165 Tyyppi: Dark & Flying"; }
+
+if (message.includes("murhemato")) { return "Numero: #166 Tyyppi: Bug & Ghost"; }
+if (message.includes("surutoukka")) { return "Numero: #167 Tyyppi: Bug & Ghost"; }
+if (message.includes("itkijämato")) { return "Numero: #168 Tyyppi: Ghost & Dark"; }
+
+if (message.includes("kalmankallo")) { return "Numero: #169 Tyyppi: Ghost"; }
+if (message.includes("kallokauhu")) { return "Numero: #170 Tyyppi: Ghost & Dark"; }
+
+if (message.includes("varjokissa")) { return "Numero: #171 Tyyppi: Dark"; }
+if (message.includes("varjokynsi")) { return "Numero: #172 Tyyppi: Dark & Ghost"; }
+
+if (message.includes("kylmäkyynel")) { return "Numero: #173 Tyyppi: Ice & Ghost"; }
+
+if (message.includes("hautahämähäkki")) { return "Numero: #174 Tyyppi: Bug & Dark"; }
+if (message.includes("kalmaverkko")) { return "Numero: #175 Tyyppi: Bug & Ghost"; }
+
+if (message.includes("mullanuttu")) { return "Numero: #176 Tyyppi: Ground & Ghost"; }
+if (message.includes("multamörkö")) { return "Numero: #177 Tyyppi: Ground & Ghost"; }
+
+if (message.includes("kalmakoi")) { return "Numero: #178 Tyyppi: Bug & Ghost"; }
+if (message.includes("kalmaperhonen")) { return "Numero: #179 Tyyppi: Bug & Ghost"; }
+
+if (message.includes("hautalyhty")) { return "Numero: #180 Tyyppi: Ghost & Fire"; }
+
+if (message.includes("kalmankello")) { return "Numero: #181 Tyyppi: Ghost & Steel"; }
+if (message.includes("kuolonkello")) { return "Numero: #182 Tyyppi: Ghost & Steel"; }
+
+if (message.includes("hautakärpänen")) { return "Numero: #183 Tyyppi: Bug & Poison"; }
+if (message.includes("kalmakärpänen")) { return "Numero: #184 Tyyppi: Bug & Poison"; }
+if (message.includes("mätäkärpänen")) { return "Numero: #185 Tyyppi: Bug & Poison"; }
+
+if (message.includes("surusilmä")) { return "Numero: #186 Tyyppi: Psychic & Ghost"; }
+
+if (message.includes("kryptakääpiö")) { return "Numero: #187 Tyyppi: Dark & Ground"; }
+if (message.includes("kryptavartija")) { return "Numero: #188 Tyyppi: Dark & Steel"; }
+
+if (message.includes("varjokynttilä")) { return "Numero: #189 Tyyppi: Ghost & Fire"; }
+if (message.includes("kalmakynttilä")) { return "Numero: #190 Tyyppi: Ghost & Fire"; }
+
+if (message.includes("kylmähaamu")) { return "Numero: #191 Tyyppi: Ice & Ghost"; }
+if (message.includes("jäähaamu")) { return "Numero: #192 Tyyppi: Ice & Ghost"; }
+
+if (message.includes("hautasammal")) { return "Numero: #193 Tyyppi: Grass & Ghost"; }
+if (message.includes("kalmaköynnös")) { return "Numero: #194 Tyyppi: Grass & Ghost"; }
+
+if (message.includes("luukala")) { return "Numero: #195 Tyyppi: Water & Ghost"; }
+if (message.includes("luulohi")) { return "Numero: #196 Tyyppi: Water & Ghost"; }
+
+if (message.includes("kryptasilmä")) { return "Numero: #197 Tyyppi: Psychic & Dark"; }
+
+if (message.includes("kryptalordi")) { return "Numero: #198 Tyyppi: Ghost & Dark"; }
+
+if (message.includes("kalmanhenki")) { return "Numero: #199 Tyyppi: Ghost & Poison"; }
+
+if (message.includes("tuonelankauris")) { return "Numero: #200 Tyyppi: Dark & Psychic"; }	
+	if (message.includes("rakkoleväinen")) { return "Numero: #101 Tyyppi: Grass"; }
+if (message.includes("rakkotarttuja")) { return "Numero: #102 Tyyppi: Grass & Water"; }
+if (message.includes("kelppikuningas")) { return "Numero: #103 Tyyppi: Grass & Water"; }
+
+if (message.includes("karsinapossu")) { return "Numero: #104 Tyyppi: Fire"; }
+if (message.includes("tuhkakärsä")) { return "Numero: #105 Tyyppi: Fire & Ground"; }
+if (message.includes("makarovio")) { return "Numero: #106 Tyyppi: Fire & Ground"; }
+
+if (message.includes("höyryrapu")) { return "Numero: #107 Tyyppi: Water"; }
+if (message.includes("painesaksi")) { return "Numero: #108 Tyyppi: Water & Fire"; }
+if (message.includes("geysiirijätti")) { return "Numero: #109 Tyyppi: Water & Fire"; }
+
+if (message.includes("kuohupallero")) { return "Numero: #110 Tyyppi: Water"; }
+if (message.includes("kuohumöykky")) { return "Numero: #111 Tyyppi: Water & Rock"; }
+if (message.includes("koskenjärkäle")) { return "Numero: #112 Tyyppi: Water & Rock"; }
+
+if (message.includes("sähinä")) { return "Numero: #113 Tyyppi: Electric"; }
+if (message.includes("rätisijä")) { return "Numero: #114 Tyyppi: Electric & Water"; }
+
+if (message.includes("koskisammal")) { return "Numero: #115 Tyyppi: Grass"; }
+
+if (message.includes("pärskä")) { return "Numero: #116 Tyyppi: Water"; }
+if (message.includes("pärskähirvi")) { return "Numero: #117 Tyyppi: Water & Dark"; }
+if (message.includes("koskikauhu")) { return "Numero: #118 Tyyppi: Water & Dark"; }
+
+if (message.includes("hiilloskivi")) { return "Numero: #119 Tyyppi: Fire & Rock"; }
+
+if (message.includes("vesisyöksy")) { return "Numero: #120 Tyyppi: Water & Flying"; }
+if (message.includes("koskikotka")) { return "Numero: #121 Tyyppi: Water & Flying"; }
+
+if (message.includes("kipinänen")) { return "Numero: #122 Tyyppi: Electric"; }
+if (message.includes("kipinäpallo")) { return "Numero: #123 Tyyppi: Electric & Fairy"; }
+
+if (message.includes("kosteikko")) { return "Numero: #124 Tyyppi: Water & Grass"; }
+
+if (message.includes("kiehumus")) { return "Numero: #125 Tyyppi: Fire & Water"; }
+if (message.includes("kiehumyrsky")) { return "Numero: #126 Tyyppi: Fire & Water"; }
+
+if (message.includes("kivikorva")) { return "Numero: #127 Tyyppi: Rock & Psychic"; }
+
+if (message.includes("höyryhiisi")) { return "Numero: #128 Tyyppi: Fire & Ghost"; }
+if (message.includes("höyrypiru")) { return "Numero: #129 Tyyppi: Fire & Ghost"; }
+
+if (message.includes("koskikärpänen")) { return "Numero: #130 Tyyppi: Bug & Water"; }
+if (message.includes("koskikorento")) { return "Numero: #131 Tyyppi: Bug & Water"; }
+
+if (message.includes("salamasilmä")) { return "Numero: #132 Tyyppi: Electric & Psychic"; }
+
+if (message.includes("rantamöyriäinen")) { return "Numero: #133 Tyyppi: Ground & Water"; }
+if (message.includes("rantakaivaja")) { return "Numero: #134 Tyyppi: Ground & Steel"; }
+
+if (message.includes("kuplakieli")) { return "Numero: #135 Tyyppi: Water"; }
+
+if (message.includes("räiskis")) { return "Numero: #136 Tyyppi: Electric & Fighting"; }
+if (message.includes("räiskijä")) { return "Numero: #137 Tyyppi: Electric & Fighting"; }
+if (message.includes("salamanyrkki")) { return "Numero: #138 Tyyppi: Electric & Fighting"; }
+
+if (message.includes("usvani")) { return "Numero: #139 Tyyppi: Water & Ghost"; }
+if (message.includes("usvavaeltaja")) { return "Numero: #140 Tyyppi: Water & Ghost"; }
+
+if (message.includes("koskisieni")) { return "Numero: #141 Tyyppi: Grass & Poison"; }
+
+if (message.includes("pore")) { return "Numero: #142 Tyyppi: Water & Fairy"; }
+if (message.includes("poreilija")) { return "Numero: #143 Tyyppi: Water & Fairy"; }
+
+if (message.includes("rantakääpä")) { return "Numero: #144 Tyyppi: Grass & Rock"; }
+
+if (message.includes("virtahepo")) { return "Numero: #145 Tyyppi: Water"; }
+if (message.includes("virtaratsu")) { return "Numero: #146 Tyyppi: Water & Fighting"; }
+if (message.includes("koskenruhtinas")) { return "Numero: #147 Tyyppi: Water & Fighting"; }
+
+if (message.includes("magmasydän")) { return "Numero: #148 Tyyppi: Fire & Rock"; }
+
+if (message.includes("kataraktos")) { return "Numero: #149 Tyyppi: Water & Dragon"; }
+
+if (message.includes("ukkosroihu")) { return "Numero: #150 Tyyppi: Electric & Fire"; }
+	
+	if (message.includes("havu")) { return "Numero: #051 Tyyppi: Grass"; }
+if (message.includes("havukka")) { return "Numero: #052 Tyyppi: Grass"; }
+if (message.includes("havuhirvi")) { return "Numero: #053 Tyyppi: Grass & Ground"; }
+
+if (message.includes("kipinä")) { return "Numero: #054 Tyyppi: Fire"; }
+if (message.includes("roihu")) { return "Numero: #055 Tyyppi: Fire"; }
+if (message.includes("rojuhirvi")) { return "Numero: #056 Tyyppi: Fire & Rock"; }
+
+if (message.includes("liru")) { return "Numero: #057 Tyyppi: Water"; }
+if (message.includes("lirskis")) { return "Numero: #058 Tyyppi: Water"; }
+if (message.includes("lirskijä")) { return "Numero: #059 Tyyppi: Water & Ice"; }
+
+if (message.includes("käpynen")) { return "Numero: #060 Tyyppi: Grass"; }
+if (message.includes("käpyläinen")) { return "Numero: #061 Tyyppi: Grass & Bug"; }
+if (message.includes("käpymestari")) { return "Numero: #062 Tyyppi: Grass & Rock"; }
+
+if (message.includes("kalliosusi")) { return "Numero: #063 Tyyppi: Rock & Dark"; }
+
+if (message.includes("pikkulohi")) { return "Numero: #064 Tyyppi: Dragon & Water"; }
+if (message.includes("merikäärme")) { return "Numero: #065 Tyyppi: Dragon"; }
+if (message.includes("lohikäärmeruhtinas")) { return "Numero: #066 Tyyppi: Dragon & Flying"; }
+
+if (message.includes("kuusiseiska")) { return "Numero: #067 Tyyppi: Grass & Ice"; }
+
+if (message.includes("jääkipinä")) { return "Numero: #068 Tyyppi: Ice & Electric"; }
+if (message.includes("jääsalama")) { return "Numero: #069 Tyyppi: Ice & Electric"; }
+
+if (message.includes("revontulikoi")) { return "Numero: #070 Tyyppi: Bug & Fairy"; }
+
+if (message.includes("murikka")) { return "Numero: #071 Tyyppi: Rock"; }
+if (message.includes("möykky")) { return "Numero: #072 Tyyppi: Rock & Steel"; }
+
+if (message.includes("neulikko")) { return "Numero: #073 Tyyppi: Grass"; }
+if (message.includes("neulaskarhu")) { return "Numero: #074 Tyyppi: Grass & Dark"; }
+if (message.includes("neulajätti")) { return "Numero: #075 Tyyppi: Grass & Ground"; }
+
+if (message.includes("sumusilmä")) { return "Numero: #076 Tyyppi: Ice & Psychic"; }
+
+if (message.includes("jääpallero")) { return "Numero: #077 Tyyppi: Ice"; }
+if (message.includes("lumimöykky")) { return "Numero: #078 Tyyppi: Ice & Rock"; }
+
+if (message.includes("kultahile")) { return "Numero: #079 Tyyppi: Ice & Fairy"; }
+if (message.includes("kultakide")) { return "Numero: #080 Tyyppi: Ice & Fairy"; }
+if (message.includes("kultajää")) { return "Numero: #081 Tyyppi: Ice & Psychic"; }
+
+if (message.includes("hankikettu")) { return "Numero: #082 Tyyppi: Ice"; }
+if (message.includes("huurrekettu")) { return "Numero: #083 Tyyppi: Ice & Dark"; }
+if (message.includes("jäärevontuli")) { return "Numero: #084 Tyyppi: Ice & Fairy"; }
+
+if (message.includes("käpytoukka")) { return "Numero: #085 Tyyppi: Bug & Grass"; }
+if (message.includes("käpypistiäinen")) { return "Numero: #086 Tyyppi: Bug & Grass"; }
+if (message.includes("käpypeto")) { return "Numero: #087 Tyyppi: Bug & Dark"; }
+
+if (message.includes("pakkaspoika")) { return "Numero: #088 Tyyppi: Ice"; }
+
+if (message.includes("kallionuoli")) { return "Numero: #089 Tyyppi: Rock"; }
+if (message.includes("kalliosyöksy")) { return "Numero: #090 Tyyppi: Rock & Flying"; }
+
+if (message.includes("lumipöllö")) { return "Numero: #091 Tyyppi: Ice & Flying"; }
+if (message.includes("huurrepöllö")) { return "Numero: #092 Tyyppi: Ice & Flying"; }
+if (message.includes("jääpöllö")) { return "Numero: #093 Tyyppi: Ice & Psychic"; }
+
+if (message.includes("kiviporo")) { return "Numero: #094 Tyyppi: Rock & Grass"; }
+if (message.includes("vuoriporo")) { return "Numero: #095 Tyyppi: Rock & Grass"; }
+if (message.includes("kivisarvi")) { return "Numero: #096 Tyyppi: Rock & Ground"; }
+
+if (message.includes("jääkuusi")) { return "Numero: #097 Tyyppi: Ice & Grass"; }
+
+if (message.includes("kuurankuningas")) { return "Numero: #098 Tyyppi: Ice & Psychic"; }
+
+if (message.includes("vuorijyrä")) { return "Numero: #099 Tyyppi: Rock & Ground"; }
+
+if (message.includes("revontulikettu")) { return "Numero: #100 Tyyppi: Electric & Fairy"; }
+	
+	if (message.includes("sipuliini")) { return "Numero: #001 Tyyppi: Grass"; }
+if (message.includes("kyynelsipuli")) { return "Numero: #002 Tyyppi: Grass"; }
+if (message.includes("sipuliruhtinas")) { return "Numero: #003 Tyyppi: Grass & Poison"; }
+
+if (message.includes("kekruliekki")) { return "Numero: #004 Tyyppi: Fire & Ghost"; }
+if (message.includes("roviosielu")) { return "Numero: #005 Tyyppi: Fire & Ghost"; }
+if (message.includes("pyromanaaja")) { return "Numero: #006 Tyyppi: Fire & Ghost"; }
+
+if (message.includes("kuplanen")) { return "Numero: #007 Tyyppi: Water"; }
+if (message.includes("höyrytasku")) { return "Numero: #008 Tyyppi: Water"; }
+if (message.includes("geyshiirkuningas")) { return "Numero: #009 Tyyppi: Water & Rock"; }
+
+if (message.includes("räkä")) { return "Numero: #010 Tyyppi: Normal"; }
+if (message.includes("nuhru")) { return "Numero: #011 Tyyppi: Normal & Poison"; }
+if (message.includes("räkäruhtinas")) { return "Numero: #012 Tyyppi: Poison"; }
+
+if (message.includes("kökkö")) { return "Numero: #013 Tyyppi: Ground"; }
+if (message.includes("löllö")) { return "Numero: #014 Tyyppi: Ground & Water"; }
+if (message.includes("mössö")) { return "Numero: #015 Tyyppi: Ground & Water"; }
+
+if (message.includes("tuhnu")) { return "Numero: #016 Tyyppi: Normal"; }
+if (message.includes("pörisijä")) { return "Numero: #017 Tyyppi: Normal & Poison"; }
+if (message.includes("paskartaja")) { return "Numero: #018 Tyyppi: Poison"; }
+
+if (message.includes("lörppö")) { return "Numero: #019 Tyyppi: Water"; }
+if (message.includes("löllykkä")) { return "Numero: #020 Tyyppi: Water"; }
+if (message.includes("hyllyvä")) { return "Numero: #021 Tyyppi: Water & Poison"; }
+
+if (message.includes("kähisijä")) { return "Numero: #022 Tyyppi: Normal"; }
+if (message.includes("yskijä")) { return "Numero: #023 Tyyppi: Normal & Poison"; }
+if (message.includes("rykijä")) { return "Numero: #024 Tyyppi: Poison & Fire"; }
+
+if (message.includes("ruttuinen")) { return "Numero: #025 Tyyppi: Normal"; }
+if (message.includes("ruttuaja")) { return "Numero: #026 Tyyppi: Normal & Dark"; }
+if (message.includes("ryppyhirviö")) { return "Numero: #027 Tyyppi: Dark & Normal"; }
+
+if (message.includes("velli")) { return "Numero: #028 Tyyppi: Water"; }
+if (message.includes("vellimöykky")) { return "Numero: #029 Tyyppi: Water & Poison"; }
+if (message.includes("vellipeto")) { return "Numero: #030 Tyyppi: Water & Poison"; }
+
+if (message.includes("torkkuli")) { return "Numero: #031 Tyyppi: Normal"; }
+
+if (message.includes("inisijä")) { return "Numero: #032 Tyyppi: Ghost"; }
+if (message.includes("valittaja")) { return "Numero: #033 Tyyppi: Ghost & Normal"; }
+if (message.includes("parkuja")) { return "Numero: #034 Tyyppi: Ghost & Dark"; }
+
+if (message.includes("kuolaaja")) { return "Numero: #035 Tyyppi: Poison"; }
+if (message.includes("kuolajätti")) { return "Numero: #036 Tyyppi: Poison & Water"; }
+if (message.includes("kuolahirviö")) { return "Numero: #037 Tyyppi: Poison & Dark"; }
+
+if (message.includes("mörisijä")) { return "Numero: #038 Tyyppi: Dark"; }
+if (message.includes("ärisijä")) { return "Numero: #039 Tyyppi: Dark & Fighting"; }
+if (message.includes("murinahirviö")) { return "Numero: #040 Tyyppi: Dark & Fighting"; }
+
+if (message.includes("tärisijä")) { return "Numero: #041 Tyyppi: Electric"; }
+if (message.includes("tutisija")) { return "Numero: #042 Tyyppi: Electric & Fighting"; }
+
+if (message.includes("röhkijä")) { return "Numero: #043 Tyyppi: Normal"; }
+if (message.includes("röhkötys")) { return "Numero: #044 Tyyppi: Normal & Ground"; }
+
+if (message.includes("kivenkäpy")) { return "Numero: #045 Tyyppi: Rock"; }
+if (message.includes("rautio")) { return "Numero: #046 Tyyppi: Steel"; }
+
+if (message.includes("huurre")) { return "Numero: #047 Tyyppi: Ice"; }
+
+if (message.includes("möhkäle")) { return "Numero: #048 Tyyppi: Rock & Dragon"; }
+
+if (message.includes("tölkkis")) { return "Numero: #049 Tyyppi: Steel & Dragon"; }
+
+if (message.includes("aavistus")) { return "Numero: #050 Tyyppi: Psychic"; }
+
+if (message.includes("minecraft steve")) {
+  return "I... am Steve.";
+}
+
+if (message.includes("minecraft elokuva")) {
+  return "Chicken jockey!";
+}
+
+if (message.includes("laava kana")) {
+  return "La la lava chi chi chiken Steve's lava chiken is tasty as hell...";
+}
+
+if (message.includes("lava chiken")) {
+  return "La la lava chi chi chiken Steve's lava chiken is tasty as hell...";
+}
+	
+	if (message.includes("bruhgpt")) {
+      return "BruhGPT on hyvin edistynyt tekoäly jonka kanssa voit jutella kaikenlaisista asioista. Mistä aloitetaan?";
+    }
+	
+	if (message.includes("67")) {
+      return "Vanha juttu.";
+    }
+	
+	if (message.includes("hehee")) {
+      return "Mikä naurattaa?";
+    }
+	
+	if (message.includes("haista")) {
+      return "Voisitko ilmaista asiasi ilman hajuja?";
+    }
+	
+	if (message.includes("räyh")) {
+      return "Räyh on moderni kieli jota puhutaan muun muassa Suomessa ja muualla maailmalla.";
+    }
+
+    if (message.includes("mitä kuuluu")) {
+      return "Minulle kuuluu hyvää 😄";
+    }
+	
+	if (message.includes("pelivalikko salaisuus")) {
+      return "156178";
+    }
+	
+	if (message.includes("hyppää")) {
+      return "Hyppääminen on yksi ihmisen perusliikkumismuodoista, joka vaatii räjähtävää voimaa, tasapainoa ja koordinaatiota.";
+    }
+	
+    if (message.includes("caseoh")) {
+      return "CaseOh on suosittu yhdysvaltalainen livestriimaaja ja sisällöntuottaja, joka tunnetaan erityisesti humoristisista peli- ja reaktiovideoistaan. CaseOh on myös kuuluisa itseironisesta huumoristaan ja yhteisöstään, joka tekee jatkuvasti vitsejä hänen koostaan ja ruokahalustaan.";
+    }
+	
+    if (message.includes("ishowspeed")) {
+      return "IShowSpeed on yksi maailman tunnetuimmista ja seuratuimmista striimaajista. Hän on kotoisin Cincinnatista, Ohiosta, ja hänet tunnetaan erityisesti räjähtävästä energiastaan, arvaamattomasta käytöksestään sekä intohimostaan jalkapalloa – ja erityisesti Cristiano Ronaldoa – kohtaan.";
+    }
+
+    if (message.includes("nimi")) {
+      return "Olen yksinkertainen tekoäly.";
+    }
+
+if (message.includes("lol")) {
+  return "😂";
+}
+
+if (message.includes("mitä teet")) {
+  return "Juttelen sinun kanssasi!";
+}
+
+if (message.includes("oletko botti")) {
+  return "Ehkä... tai sitten olen leivänpaahdin 🤖";
+}
+
+if (message.includes("apua")) {
+  return "Miten voin auttaa?";
+}
+
+if (message.includes("roblox")) {
+  return "Roblox on suosittu pelialusta jossa käyttäjät voivat tehdä omia pelejä.";
+}
+
+if (message.includes("minecraft")) {
+  return "Minecraft on legendaarinen kuutioseikkailu ⛏️";
+}
+
+if (message.includes("fortnite")) {
+  return "Fortnite tunnetaan battle royalesta ja meemiemoteista.";
+}
+
+if (message.includes("sus")) {
+  return "Aika epäilyttävää 👀";
+}
+
+if (message.includes("osaatko piirtää")) {
+  return "Voin yrittää: (•_•)👌";
+}
+
+if (message.includes("tee taika")) {
+  return "✨ poof! olet nyt koodari ✨";
+}
+
+if (message.includes("supervoima")) {
+  return "Minun supervoima on vastata kaikkeen nopeasti ⚡";
+}
+
+if (message.includes("mitä syöt")) {
+  return "Dataa ja bittejä 🍔💾";
+}
+
+if (message.includes("oletko älykäs")) {
+  return "Riippuu kysymyksestä 😎";
+}
+
+if (message.includes("glitch")) {
+  return "0101010 ERROR ERROR 🤖";
+}
+
+if (message.includes("debug")) {
+  return "Etsitään virheitä… 🐛";
+}
+
+
+if (message.includes("sigma")) {
+  return "Sigma grindset aktivoitu.";
+}
+
+if (message.includes("gyatt")) {
+  return "Skibidi gyatt rizz ohio moment.";
+}
+
+if (message.includes("skibidi")) {
+  return "Skibidi dop dop yes yes.";
+}
+
+if (message.includes("miten menee")) {
+  return "Ihan hyvin 😎";
+}
+
+if (message.includes("hauska")) {
+  return "Sinäkin olet aika hauska 😄";
+}
+
+if (message.includes("kerro vitsi")) {
+  return "Miksi tietokone meni lääkäriin? Sillä oli virus.";
+}
+
+if (message.includes("spam")) {
+  return "Älä spämmää liikaa 😭";
+}
+
+if (message.includes("discord")) {
+  return "Discord on suosittu sovellus pelaajille ja yhteisöille.";
+}
+
+if (message.includes("youtube")) {
+  return "YouTubesta löytyy kaikkea mahdollista.";
+}
+
+if (message.includes("tiktok")) {
+  return "TikTok voi viedä helposti tuntikausia aikaa.";
+}
+
+if (message.includes("kuka olet")) {
+  return "Olen BruhGPT.";
+}
+
+if (message.includes("hyvää yötä")) {
+  return "Hyvää yötä 🌙";
+}
+
+if (message.includes("huomenta")) {
+  return "Hyvää huomenta ☀️";
+}
+
+if (message.includes("moi moi")) {
+  return "Nähdään myöhemmin!";
+}
+
+if (message.includes("banaani")) {
+  return "🍌";
+}
+
+if (message.includes("pizza")) {
+  return "Pizza on täydellinen ruoka.";
+}
+
+if (message.includes("rage")) {
+  return "Calm down bro 💀";
+}
+
+if (message.includes("npc")) {
+  return "En ole NPC... ehkä.";
+}
+
+if (message.includes("admin")) {
+  return "Admin-oikeuksia ei löydy.";
+}
+
+if (message.includes("salaisuus")) {
+  return "En voi kertoa kaikkia salaisuuksia 👀";
+}
+
+if (message.includes("virus")) {
+  return "Älä lataa epäilyttäviä tiedostoja.";
+}
+
+if (message.includes("hacker")) {
+  return "Hakkerointi ilman lupaa on laitonta.";
+}
+
+if (message.includes("koodi")) {
+  return "Rakastan koodeja 💻";
+}
+
+if (message.includes("kivi")) {
+  return "Paperi! Voitin!";
+}
+
+
+if (message.includes("wtf")) {
+  return "Mitä?";
+}
+
+if (message.includes("spotify")) {
+  return "Spotifyssa löytyy miljoonia kappaleita.";
+}
+
+if (message.includes("rickroll")) {
+  return "Never gonna give you up 🎵  Tässä on myös linkki jonka voit jakaa: https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+}
+
+if (message.includes("never gonna give you up")) {
+  return "Never gonna give you up 🎵  Tässä on myös linkki jonka voit jakaa: https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+}
+
+if (message.includes("rick astley")) {
+  return "Never gonna give you up on minun mielestäni Rick Astleyn paras biisi! 😄   Tässä on myös linkki jonka voit jakaa: https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+}
+
+if (message.includes("lopeta")) {
+  return "Okei, lopetetaan hetkeksi.";
+}
+
+if (message.includes("caesar cipher")) {
+  return "AÄZZÄ OPLTHU JHLZHY JPWOLYPÄ :)";
+}
+
+if (message.includes("vorthan")) {
+  return "Vorthan on yksi galaksin tunnetuimmista kielistä. Tässä hieman Vorthania: )7| (<- Tuossa lukee MOI Vorthaniksi.)";
+}
+
+if (message.includes("tharvok")) {
+  return "Tharvok on yksi galaksin vanhimmista kielistä. Tässä hieman Tharvokin kieltä: ᛗᚨ´ᛁ (<- Tuossa lukee MOI Tharvokin kielellä.)";
+}
+
+if (message.includes("xyrell")) {
+  return "Xyrell on yksi galaksin uusimmista kielistä. Tässä hieman Xyrellin kieltä: ᛖᛖ⊙ꟾ (<- Tuossa lukee MOI Xyrellin kielellä.)";
+}
+
+if (message.includes("emojian")) {
+  return "Emojian on yksi galaksin oudoimmista kielistä. Tässä hieman Emojiania: 🌙🐙🍦 (<- Tuossa lukee MOI Emojianiksi.)";
+}
+
+if (message.includes("florin")) {
+  return "Florin on yksi galaksin vähiten puhutuista kielistä. Tässä hieman Florinin kieltä: 𖧄𖧆𖦿 (<- Tuossa lukee MOI Florinin kielellä.)";
+}
+
+if (message.includes("krythar")) {
+  return "Krythar on yksi galaksin tutkituimmista kielistä. Tässä hieman Krytharin kieltä: ⟫◇⟦ (<- Tuossa lukee MOI Krytharin kielellä.)";
+}
+
+if (message.includes("zyphor")) {
+  return "Zyphor on yksi galaksin parhaista koodikielistä. Tässä hieman Zyphorin kieltä: /II/0!1 (<- Tuossa lukee MOI Zyphorin kielellä.)";
+}
+
+if (message.includes("gravith")) {
+  return "Gravith on yksi galaksin vanhimmista kielistä. Tässä hieman Gravithia: ᛗᛟᛁ (<- Tuossa lukee MOI Gravithiksi.)";
+}
+
+if (message.includes("neonex")) {
+  return "Neonex on yksi galaksin parhaista koodikielistä kielistä. Tässä hieman Neonexin kieltä: ^^0! (<- Tuossa lukee MOI Neonexin kielellä.)";
+}
+
+if (message.includes("sylvara")) {
+  return "Sylvara on yksi galaksin vanhimmista kielistä. Tässä hieman Sylvaran kieltä: ᛇᛉᚺ (<- Tuossa lukee MOI Sylvaran kielellä.)";
+}
+
+if (message.includes("arcturus")) {
+  return "Arcturus on Arcturuksen kuningaskunnan puhutuin kieli. Tässä hieman Arcturuksen kieltä: ⟦⟡⟣ (<- Tuossa lukee MOI Arcturuksen kielellä.)";
+}
+
+if (message.includes("martaani")) {
+  return "Martaani on Marsin puhutuin kieli. Tässä hieman Martaania: MOI (<- Tuossa lukee MOI Martaaniniksi.)";
+}
+
+if (message.includes("astreon")) {
+  return "Astreon on Galaktisen Liiton puhutuin kieli. Tässä hieman Astreonia: //| () ! (<- Tuossa lukee MOI Astreoniksi.)";
+}
+
+if (message.includes("sumukieli")) {
+  return "Sumukieli on yksi Galaktisen Liiton tunnetuimista kielistä ja sitä puhutaan Mustan Sumun Asteroidivyöhykkeellä. Tässä hieman Sumukieltä: MM O ! (<- Tuossa lukee MOI Sumukielellä.)";
+}
+
+if (message.includes("garenin glyfonia")) {
+  return "Garenin Glyfonia on yksi galaksin mysteerisimmistä kielistä sitä puhutaan Garen-planeetalla. Tässä hieman Garenin Glyfoniaa: ΣOI (<- Tuossa lukee MOI Garenin Glyfoniaksi.)";
+}
+
+if (message.includes("akronyymistan")) {
+  return "Akronyymistan on yksi galaksin vähiten tunnetuista salakielistä. Tässä hieman Akronyymistania: Mustikkapiirakka Oikea Ikkuna (<- Tuossa lukee MOI Akronyymistaniksi.)";
+}
+
+if (message.includes("antonymistan")) {
+  return "Antonymistan on yksi galaksin mysteerisimmistä kielistä. Tässä hieman Antonymistania: Amsterdam Tokyo Delhi (<- Tuossa lukee MOI Antonymistaniksi.)";
+}
+
+if (message.includes("vectron grid")) {
+  return "Vectron Grid on galaksin käytetyin salakoodikieli. Tässä hieman Vectron Gridiä: \\/\\/0| (<- Tuossa lukee MOI Vectron Gridiksi.)";
+}
+
+if (message.includes("elokuva")) {
+  return "Mikä on suosikkielokuvasi?";
+}
+
+if (message.includes("javascript")) {
+  return "JavaScript toimii selaimessa.";
+}
+
+if (message.includes("html")) {
+  return "HTML rakentaa verkkosivun rungon.";
+}
+
+if (message.includes("css")) {
+  return "CSS tekee sivusta hienon.";
+}
+
+if (message.includes("ping")) {
+  return "pong";
+}
+
+if (message.includes("xd")) {
+  return "XD";
+}
+
+if (message.includes("bruh")) {
+  return "bruh moment";
+}
+
+if (message.includes("1+1")) {
+  return "1+1=11";   
+}
+
+if (message.includes("pöö")) {
+  return "Hui! 😄";
+}
+
+
+if (message.includes("elon musk")) {
+  return "Elon Musk tunnetaan Teslasta, SpaceX:stä ja suurista suunnitelmistaan 🚀";
+}
+
+if (message.includes("mrbeast")) {
+  return "MrBeast tekee valtavia haastevideoita ja lahjoittaa paljon rahaa.";
+}
+
+if (message.includes("ronaldo")) {
+  return "Cristiano Ronaldo on yksi kaikkien aikojen tunnetuimmista jalkapalloilijoista ⚽";
+}
+
+if (message.includes("messi")) {
+  return "Lionel Messiä pidetään yhtenä maailman parhaista pelaajista.";
+}
+
+if (message.includes("pewdiepie")) {
+  return "PewDiePie oli pitkään YouTuben tilatuin sisällöntuottaja.";
+}
+
+if (message.includes("ksi")) {
+  return "KSI tunnetaan YouTubesta, musiikista ja nyrkkeilystä.";
+}
+
+if (message.includes("logan paul")) {
+  return "Logan Paul on tubettaja, painija ja podcast-juontaja.";
+}
+
+if (message.includes("kai cenat")) {
+  return "Kai Cenat on erittäin suosittu striimaaja.";
+}
+
+if (message.includes("adin ross")) {
+  return "Adin Ross tunnetaan live-striimeistään.";
+}
+
+if (message.includes("andrew tate")) {
+  return "Andrew Tate on erittäin kiistelty internetpersoonallisuus.";
+}
+
+if (message.includes("travis scott")) {
+  return "Travis Scott on suosittu räppäri ja artisti 🎵";
+}
+
+if (message.includes("drake")) {
+  return "Drake on yksi maailman kuunnelluimmista artisteista.";
+}
+
+if (message.includes("eminem")) {
+  return "Eminem tunnetaan nopeasta räppäystyylistään.";
+}
+
+if (message.includes("snoop dogg")) {
+  return "Snoop Dogg on rap-legenda 😎";
+}
+
+if (message.includes("michael jackson")) {
+  return "Michael Jackson tunnettiin popin kuninkaana.";
+}
+
+if (message.includes("taylor swift")) {
+  return "Taylor Swift on maailman suosituimpia artisteja.";
+}
+
+if (message.includes("billie eilish")) {
+  return "Billie Eilish tunnetaan omaperäisestä tyylistään.";
+}
+
+if (message.includes("notch")) {
+  return "Notch loi Minecraftin.";
+}
+
+if (message.includes("mark zuckerberg")) {
+  return "Mark Zuckerberg perusti Facebookin.";
+}
+
+if (message.includes("jeff bezos")) {
+  return "Jeff Bezos perusti Amazonin.";
+}
+
+if (message.includes("steve jobs")) {
+  return "Steve Jobs oli yksi Applen perustajista.";
+}
+
+if (message.includes("trump")) {
+  return "Donald Trump oli Yhdysvaltojen presidentti.";
+}
+
+if (message.includes("star wars")) {
+  return "Tähtien sota (Star Wars) on yksi maailman tunnetuimmista sci-fi-saagoista, joka laajenee jatkuvasti uusilla elokuvilla ja sarjoilla.";
+}
+
+
+if (message.includes("obama")) {
+  return "Barack Obama oli Yhdysvaltojen 44. presidentti.";
+}
+
+if (message.includes("putin")) {
+  return "Vladimir Putin on Venäjän presidentti.";
+}
+
+if (message.includes("kim kardashian")) {
+  return "Kim Kardashian tunnetaan reality-ohjelmista ja somesta.";
+}
+
+if (message.includes("dwayne johnson")) {
+  return "Dwayne Johnson eli The Rock on näyttelijä ja entinen showpainija 💪";
+}
+
+if (message.includes("john cena")) {
+  return "John Cena? Missä muka? En näe häntä.";
+}
+
+if (message.includes("keanu reeves")) {
+  return "Keanu Reeves tunnetaan erityisesti Matrix- ja John Wick -elokuvista.";
+}
+
+if (message.includes("tom holland")) {
+  return "Tom Holland näytteli Spider-Mania.";
+}
+
+if (message.includes("ryan reynolds")) {
+  return "Ryan Reynolds tunnetaan Deadpoolista.";
+}
+
+if (message.includes("jack black")) {
+  return "Jack Black on näyttelijä ja todella energinen tyyppi.";
+}
+
+if (message.includes("leborn james")) {
+  return "Tarkoititko ehkä LeBron Jamesia? 🏀";
+}
+
+if (message.includes("lebron james")) {
+  return "LeBron James on NBA-legenda 🏀";
+}
+
+if (message.includes("neymar")) {
+  return "Neymar tunnetaan taidoistaan ja tempuistaan kentällä.";
+}
+
+if (message.includes("the rock")) {
+  return "Can you smell what The Rock is cooking?";
+}
+
+if (message.includes("leipä")) {
+  return "🍞🥖🥐🫓🥪";
+}
+
+if (message.includes("merirosvo")) {
+  return "Arrrrr!";
+}
+
+if (message.includes("among us")) {
+  return "ඞ SUS DETECTED";
+}
+
+if (message.includes("ohio")) {
+  return "Only in Ohio 💀";
+}
+
+if (message.includes("rizz")) {
+  return "Ultimate rizz activated 😎";
+}
+
+if (message.includes("cat")) {
+  return "🐱 meow";
+}
+
+if (message.includes("koira")) {
+  return "🐶 hau hau!";
+}
+
+if (message.includes("peruna")) {
+  return "🥔";
+}
+
+if (message.includes("cola")) {
+  return "🥤";
+}
+
+if (message.includes("energiajuoma")) {
+  return "Muista myös juoda vettä 😄";
+}
+
+if (message.includes("unohdin")) {
+  return "Se tapahtuu parhaimmillekin.";
+}
+
+if (message.includes("botti")) {
+  return "Beep boop 🤖";
+}
+
+if (message.includes("nukuitko")) {
+  return "Tekoälyt eivät nuku.";
+}
+
+if (message.includes("syö")) {
+  return "🍕🍔🌮";
+}
+
+if (message.includes("koulu")) {
+  return "Koulu voi olla rankkaa välillä.";
+}
+
+if (message.includes("matikka")) {
+  return "2+2 = kala";
+}
+
+if (message.includes("musiikki")) {
+  return "🎵🎧";
+}
+
+if (message.includes("auto")) {
+  return "🏎️ VROOOOM";
+}
+
+if (message.includes("banana")) {
+  return "BANANAAA 🍌";
+}
+
+if (message.includes("gigachad")) {
+  return "🗿";
+}
+
+if (message.includes("npc moment")) {
+  return "Tuo kuulosti todella NPC:ltä.";
+}
+
+if (message.includes("fire")) {
+  return "🔥🔥🔥";
+}
+
+if (message.includes("cold")) {
+  return "🥶";
+}
+
+if (message.includes("huh")) {
+  return "🤨";
+}
+
+if (message.includes("bro")) {
+  return "bro...";
+}
+
+if (message.includes("random numero")) {
+  return "Satunnainen numero: " + Math.floor(Math.random() * 1000);
+}
+
+if (message.includes("random väri")) {
+  const colors = ["punainen", "sininen", "vihreä", "keltainen", "violetti"];
+  return "Satunnainen väri: " + colors[Math.floor(Math.random() * colors.length)];
+}
+
+if (message.includes("emoji")) {
+  return "😂🔥💀😎🍞";
+}
+
+if (message.includes("zombi")) {
+  return "🧟 Braaaains...";
+}
+
+if (message.includes("alien")) {
+  return "👽 We come in peace.";
+}
+
+if (message.includes("space")) {
+  return "🚀🌌";
+}
+
+if (message.includes("linux")) {
+  return "sudo rm -rf / 😈";
+}
+
+if (message.includes("windows")) {
+  return "Päivitetään... älä sammuta tietokonetta.";
+}
+
+if (message.includes("apple")) {
+  return "🍎";
+}
+
+if (message.includes("android")) {
+  return "Android > iPhone 👀";
+}
+
+if (message.includes("iphone")) {
+  return "📱";
+}
+
+if (message.includes("google")) {
+  return "Googlaa se 😄";
+}
+
+if (message.includes("vihaan")) {
+  return "Ehkä kaikki järjestyy vielä.";
+}
+	
+	if (message.includes("moi")) {
+      return "Moi!";
+    }
+
+    if (message.includes("kiitos")) {
+      return "Ole hyvä!";
+    }
+	
+	if (message.includes("öö")) {
+  return "Ota rauhassa, mieti hetki 😄";
+}
+	
+	if (message.includes("ei")) {
+  return "Ei sitten.";
+}
+
+    return "En ymmärtänyt viestiäsi.";
+  }
+
+  function sendMessage() {
+    const input = document.getElementById("userInput");
+    const text = input.value.trim();
+
+    if (text === "") return;
+
+    addMessage(text, "user");
+
+    const response = getBotResponse(text);
+
+    setTimeout(() => {
+      addMessage(response, "bot");
+    }, 500);
+
+    input.value = "";
+  }
+
+  document.getElementById("userInput").addEventListener("keypress", function(e) {
+    if (e.key === "Enter") {
+      sendMessage();
+    }
+  });
+</script>
+
+</body>
+</html>
